@@ -29,4 +29,10 @@
     <string name="dewi">Dewi Nur Arifah\nCloud Computing</string>
     <string name="muhamad_hafizh">Muhamad Hafizh \nMobile Development</string>
     <string name="chisha">Azhura Chisha\nMechine Learning</string>
+    <string name="indonesia">Indonesia</string>
+    <string name="english">English</string>
+
+    <string name="no_data">No data</string>
+    <string name="api_error">Gagal mendapatkan data dari API</string>
+    <string name="error_message">Error: %s</string>
 </resources>

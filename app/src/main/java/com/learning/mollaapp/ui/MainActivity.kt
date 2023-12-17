@@ -19,6 +19,7 @@ class MainActivity : AppCompatActivity() {
         val learningNumbers: ImageView= findViewById(R.id.btn_numbers)
         val cameraAddButton: FloatingActionButton = findViewById(R.id.camera_add)
         val aboutButton: FloatingActionButton = findViewById(R.id.aboutbtn)
+        val quizButton: FloatingActionButton = findViewById(R.id.btn_quiz)
 
         cameraAddButton.setOnClickListener(View.OnClickListener {
 
@@ -40,7 +41,12 @@ class MainActivity : AppCompatActivity() {
 
         learningNumbers.setOnClickListener(View.OnClickListener {
 
-            val intent = Intent(this@MainActivity, AlphabetActivity::class.java)
+            val intent = Intent(this@MainActivity, NumbersActivity::class.java)
+            startActivity(intent)
+        })
+
+        quizButton.setOnClickListener(View.OnClickListener {
+            val intent = Intent(this@MainActivity, DialogLanguageActivity::class.java)
             startActivity(intent)
         })
 
