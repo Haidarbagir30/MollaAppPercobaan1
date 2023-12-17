@@ -89,6 +89,15 @@
                 app:fab_colorNormal="@color/koneng"
                 app:fab_colorPressed="@color/hejo"/>
 
+            <com.getbase.floatingactionbutton.FloatingActionButton
+                 android:id="@+id/btn_quiz"
+                 app:fab_title="frist"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 app:fab_icon="@drawable/icon_quiz"
+                 app:fab_colorNormal="@color/koneng"
+                 app:fab_colorPressed="@color/hejo"/>
+
 
         </com.getbase.floatingactionbutton.FloatingActionsMenu>
 
