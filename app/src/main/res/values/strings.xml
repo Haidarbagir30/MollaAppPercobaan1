@@ -35,4 +35,6 @@
     <string name="no_data">No data</string>
     <string name="api_error">Gagal mendapatkan data dari API</string>
     <string name="error_message">Error: %s</string>
+    <string name="btn_translate">Translate</string>
+    <string name="result">Result</string>
 </resources>

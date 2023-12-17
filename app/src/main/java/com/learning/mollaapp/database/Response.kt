@@ -2,12 +2,12 @@ package com.learning.mollaapp.database
 
 data class Response(
 	val sentence: Sentence? = null,
-	val questionId: String? = null
+	val question_id: String? = null
 )
 
 data class Sentence(
-	val originalSentence: String? = null,
-	val correctTranslation: String? = null,
-	val shuffledSentence: String? = null
+	val original_sentence: String? = null,
+	val correct_translation: String? = null,
+	val shuffled_sentence: String? = null
 )
 

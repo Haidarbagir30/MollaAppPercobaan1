@@ -32,14 +32,10 @@ class IndonesiaActivity : AppCompatActivity() {
         shuffledSentenceEditText = findViewById(R.id.shuffled_sentence)
         submitButton = findViewById(R.id.submit_button)
 
-        // Panggil fungsi untuk mendapatkan data dari API
         getQuestions()
 
-        // Atur listener untuk tombol submit
+
         submitButton.setOnClickListener {
-            // Handle logika pemrosesan jawaban pengguna di sini
-            // Misalnya, bandingkan jawaban pengguna dengan jawaban yang benar
-            // dan berikan feedback ke pengguna
             checkUserAnswer()
         }
     }
@@ -53,54 +49,41 @@ class IndonesiaActivity : AppCompatActivity() {
                 response: RetrofitResponse<Response>
             ) {
                 if (response.isSuccessful) {
-                    // Tangani hasil respons di sini
                     responseData = response.body()
-                    // Tampilkan atau proses data sesuai kebutuhan Anda
-                    val resultText = responseData?.sentence?.correctTranslation ?: "Data API tidak valid."
-                    resultTextView.text = resultText
 
-                    // Tampilkan original sentence
-                    originalSentenceTextView.text = responseData?.sentence?.originalSentence ?: "Data API tidak valid."
+                    val resultText = responseData?.sentence?.correct_translation ?: "Data API tidak valid."
                     resultTextView.text = resultText
-
-                    // Set nilai default untuk shuffled sentence di EditText
-                    shuffledSentenceEditText.setText(responseData?.sentence?.shuffledSentence)
+                    originalSentenceTextView.text = responseData?.sentence?.original_sentence ?: "Data API tidak valid."
+                    resultTextView.text = resultText
+                    shuffledSentenceEditText.setText(responseData?.sentence?.shuffled_sentence)
                 } else {
-                    // Tangani kesalahan jika respons tidak berhasil
                     resultTextView.text = getString(R.string.api_error)
                 }
             }
 
             override fun onFailure(call: Call<Response>, t: Throwable) {
-                // Tangani kesalahan jaringan atau kesalahan lainnya
                 resultTextView.text = getString(R.string.error_message, t.message)
             }
         })
     }
 
     private fun checkUserAnswer() {
-        // Dapatkan jawaban pengguna dari EditText
+
         val userAnswer = shuffledSentenceEditText.text.toString()
-
-        // Bandingkan jawaban pengguna dengan jawaban yang benar
-        val correctAnswer = responseData?.sentence?.correctTranslation ?: ""
-
-        // Bandingkan jawaban pengguna dengan jawaban yang benar (ignoring case)
+        val correctAnswer = responseData?.sentence?.correct_translation ?: ""
         val isCorrect = userAnswer.equals(correctAnswer, ignoreCase = true)
 
-        // Berikan feedback ke pengguna berdasarkan hasil perbandingan
         if (isCorrect) {
             showToast("Jawaban benar!")
         } else {
             showToast("Jawaban salah. Coba lagi.")
         }
 
-        // Panggil fungsi untuk mendapatkan pertanyaan berikutnya
+
         getQuestions()
     }
 
     private fun showToast(message: String) {
-        // Tampilkan pesan toast ke pengguna
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 }
