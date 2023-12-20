@@ -8,7 +8,7 @@
     android:background="@drawable/bg_utama"
     tools:context=".ui.CameraActivity">
 
-    <SurfaceView
+    <androidx.camera.view.PreviewView
         android:id="@+id/cameraView"
         android:layout_weight="1"
         android:layout_width="match_parent"
