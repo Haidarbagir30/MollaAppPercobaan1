@@ -15,6 +15,7 @@ import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.ImageProxy
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
+import androidx.camera.view.PreviewView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.learning.mollaapp.R
@@ -36,7 +37,7 @@ class CameraActivity : AppCompatActivity() {
 
     private lateinit var cameraExecutor: ExecutorService
     private lateinit var apiServiceCamera: ApiServiceCamera
-    private lateinit var cameraView:SurfaceView
+    private lateinit var cameraView:PreviewView
     private lateinit var tvResult: TextView
     private lateinit var btTranslate: Button
 
@@ -47,6 +48,7 @@ class CameraActivity : AppCompatActivity() {
         // Inisialisasi komponen UI
         tvResult = findViewById(R.id.tv_result)
         btTranslate = findViewById(R.id.btTranslate)
+        cameraView = findViewById(R.id.cameraView)
 
         // Inisialisasi Retrofit
         apiServiceCamera = ApiClientCamera.apiServiceCamera
