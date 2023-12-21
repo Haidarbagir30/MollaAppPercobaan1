@@ -72,15 +72,6 @@
             app:fab_colorPressed="@color/hejo">
 
             <com.getbase.floatingactionbutton.FloatingActionButton
-                android:id="@+id/camera_add"
-                app:fab_title="frist"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:fab_icon="@drawable/ic_camera"
-                app:fab_colorNormal="@color/koneng"
-                app:fab_colorPressed="@color/hejo"/>
-
-            <com.getbase.floatingactionbutton.FloatingActionButton
                 android:id="@+id/aboutbtn"
                 app:fab_title="frist"
                 android:layout_width="wrap_content"

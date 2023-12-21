@@ -17,15 +17,8 @@ class MainActivity : AppCompatActivity() {
 
         val learningAlphabet: ImageView= findViewById(R.id.btn_alphabet)
         val learningNumbers: ImageView= findViewById(R.id.btn_numbers)
-        val cameraAddButton: FloatingActionButton = findViewById(R.id.camera_add)
         val aboutButton: FloatingActionButton = findViewById(R.id.aboutbtn)
         val quizButton: FloatingActionButton = findViewById(R.id.btn_quiz)
-
-        cameraAddButton.setOnClickListener(View.OnClickListener {
-
-            val intent = Intent(this@MainActivity, CameraActivity::class.java)
-            startActivity(intent)
-        })
 
         aboutButton.setOnClickListener(View.OnClickListener {
 

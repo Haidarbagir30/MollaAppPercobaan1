@@ -7,6 +7,21 @@
     android:background="@drawable/bg_numbers"
     tools:context=".ui.NumbersActivity">
 
+    <TextView
+        android:id="@+id/huruf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:fontFamily="@font/poppins_medium"
+        android:textColor="@color/koneng"
+        android:textSize="50sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/scrollview"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.154" />
+
     <ScrollView
         android:id="@+id/scrollview"
         android:layout_width="wrap_content"
@@ -41,7 +56,7 @@
                 android:orientation="horizontal">
 
                 <ImageButton
-                    android:id="@+id/image_a"
+                    android:id="@+id/image_zero"
                     android:layout_width="48dp"
                     android:layout_height="68dp"
                     android:background="@drawable/angka_q"
@@ -51,6 +66,7 @@
                     android:importantForAccessibility="no" />
 
                 <ImageButton
+                    android:id="@+id/image_one"
                     android:layout_width="48dp"
                     android:layout_height="68dp"
                     android:background="@drawable/angka_w"
@@ -69,6 +85,7 @@
                 android:orientation="horizontal">
 
                 <ImageButton
+                    android:id="@+id/image_two"
                     android:layout_width="48dp"
                     android:layout_height="68dp"
                     android:layout_marginTop="16dp"
@@ -77,6 +94,7 @@
                     tools:layout_editor_absoluteY="64dp"/>
 
                 <ImageButton
+                    android:id="@+id/image_three"
                     android:layout_width="48dp"
                     android:layout_height="68dp"
                     android:layout_marginTop="16dp"
@@ -84,7 +102,7 @@
                     android:layout_marginStart="35dp"
                     tools:layout_editor_absoluteX="472dp"
                     tools:layout_editor_absoluteY="27dp" />
-                <!--C D-->
+
             </LinearLayout>
 
             <LinearLayout
@@ -94,6 +112,7 @@
                 android:orientation="horizontal">
 
                 <ImageButton
+                    android:id="@+id/image_four"
                     android:layout_width="48dp"
                     android:layout_height="68dp"
                     android:layout_marginTop="16dp"
@@ -102,6 +121,7 @@
                     tools:layout_editor_absoluteY="64dp"/>
 
                 <ImageButton
+                    android:id="@+id/image_five"
                     android:layout_width="48dp"
                     android:layout_height="68dp"
                     android:layout_marginTop="16dp"
@@ -119,6 +139,7 @@
                 android:orientation="horizontal">
 
                 <ImageButton
+                    android:id="@+id/image_six"
                     android:layout_width="48dp"
                     android:layout_height="68dp"
                     android:layout_marginTop="16dp"
@@ -127,6 +148,7 @@
                     tools:layout_editor_absoluteY="64dp"/>
 
                 <ImageButton
+                    android:id="@+id/image_seven"
                     android:layout_width="48dp"
                     android:layout_height="68dp"
                     android:layout_marginTop="16dp"
@@ -144,6 +166,7 @@
                 android:orientation="horizontal">
 
                 <ImageButton
+                    android:id="@+id/image_eight"
                     android:layout_width="48dp"
                     android:layout_height="68dp"
                     android:layout_marginTop="16dp"
@@ -152,6 +175,7 @@
                     tools:layout_editor_absoluteY="64dp"/>
 
                 <ImageButton
+                    android:id="@+id/image_nine"
                     android:layout_width="48dp"
                     android:layout_height="68dp"
                     android:layout_marginTop="16dp"
@@ -170,6 +194,7 @@
                 android:orientation="horizontal">
 
                 <ImageButton
+                    android:id="@+id/image_ten"
                     android:layout_width="48dp"
                     android:layout_height="68dp"
                     android:layout_marginTop="16dp"
@@ -177,7 +202,7 @@
                     tools:layout_editor_absoluteX="289dp"
                     tools:layout_editor_absoluteY="64dp"/>
 
-                <ImageButton
+                <ImageView
                     android:layout_width="48dp"
                     android:layout_height="68dp"
                     android:layout_marginTop="16dp"
