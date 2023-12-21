@@ -4,7 +4,6 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
-import android.view.SurfaceView
 import android.widget.Button
 import android.widget.TextView
 import androidx.annotation.OptIn
@@ -12,23 +11,21 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ExperimentalGetImage
 import androidx.camera.core.ImageAnalysis
-import androidx.camera.core.ImageProxy
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
+import androidx.camera.view.PreviewView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.learning.mollaapp.R
 import com.learning.mollaapp.cameraApi.ApiClientCamera
 import com.learning.mollaapp.cameraApi.ApiServiceCamera
-import com.learning.mollaapp.cameraApi.ReadImageResponse
-import com.learning.mollaapp.cameraApi.TranslationResponse
+import com.learning.mollaapp.cameraApi.ImageResponse
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.nio.ByteBuffer
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
@@ -36,7 +33,7 @@ class CameraActivity : AppCompatActivity() {
 
     private lateinit var cameraExecutor: ExecutorService
     private lateinit var apiServiceCamera: ApiServiceCamera
-    private lateinit var cameraView:SurfaceView
+    private lateinit var cameraView: PreviewView
     private lateinit var tvResult: TextView
     private lateinit var btTranslate: Button
 
@@ -47,6 +44,7 @@ class CameraActivity : AppCompatActivity() {
         // Inisialisasi komponen UI
         tvResult = findViewById(R.id.tv_result)
         btTranslate = findViewById(R.id.btTranslate)
+        cameraView = findViewById(R.id.cameraView)
 
         // Inisialisasi Retrofit
         apiServiceCamera = ApiClientCamera.apiServiceCamera
@@ -66,6 +64,7 @@ class CameraActivity : AppCompatActivity() {
         // Menghubungkan tombol translate dengan metode terjemahan
         btTranslate.setOnClickListener {
             // Panggil metode untuk menerjemahkan gambar atau lakukan aksi yang diinginkan
+            processImage()
         }
     }
 
@@ -89,7 +88,7 @@ class CameraActivity : AppCompatActivity() {
                 .build()
                 .also {
                     it.setAnalyzer(cameraExecutor, ImageAnalysis.Analyzer { imageProxy ->
-                        processImage(imageProxy)
+                        processImage()
                     })
                 }
 
@@ -109,37 +108,35 @@ class CameraActivity : AppCompatActivity() {
         }, ContextCompat.getMainExecutor(this))
     }
 
-
-    @OptIn(ExperimentalGetImage::class) private fun processImage(imageProxy: ImageProxy) {
-        val image = imageProxy.image
-        val buffer: ByteBuffer = image?.planes?.get(0)?.buffer ?: return
-        val data = ByteArray(buffer.remaining())
-
-        buffer.get(data)
+    @OptIn(ExperimentalGetImage::class)
+    private fun processImage() {
+        // Dalam metode ini, kita tidak perlu ImageProxy karena kita hanya mengirim permintaan ke API untuk membaca gambar
+        // Jadi, kita cukup mengirim permintaan ke API dan menanggapi responsnya
 
         // Kirim data gambar ke API untuk membaca gambar
-        val imageRequestBody = data.toRequestBody("image/jpeg".toMediaTypeOrNull())
-        val imagePart = MultipartBody.Part.createFormData("image", "image.jpg", imageRequestBody)
-
-        apiServiceCamera.readImage(imagePart).enqueue(object : Callback<ReadImageResponse> {
-            override fun onResponse(
-                call: Call<ReadImageResponse>,
-                response: Response<ReadImageResponse>
-            ) {
-                val readImageResponse = response.body()
-                readImageResponse?.let {
-                    // Proses respons pembacaan gambar di sini
-                    Log.d(TAG, "Read Image Response: $it")
-                    tvResult.text = it.imageUrl ?: "No sentence found"
+        apiServiceCamera.readImage(createImagePart()).enqueue(object : Callback<ImageResponse> {
+            override fun onResponse(call: Call<ImageResponse>, response: Response<ImageResponse>) {
+                if (response.isSuccessful) {
+                    val imageResponse = response.body()
+                    imageResponse?.let {
+                        // Proses respons pembacaan gambar di sini
+                        Log.d(TAG, "Read Image Response: $it")
+                        tvResult.text = it.translatedText ?: "No translation found"
+                    }
+                } else {
+                    Log.e(TAG, "Error reading image: ${response.message()}")
                 }
-                imageProxy.close()
             }
 
-            override fun onFailure(call: Call<ReadImageResponse>, t: Throwable) {
+            override fun onFailure(call: Call<ImageResponse>, t: Throwable) {
                 Log.e(TAG, "Error reading image", t)
-                imageProxy.close()
             }
         })
+    }
+
+    private fun createImagePart(): MultipartBody.Part {
+        val imageRequestBody = ByteArray(0).toRequestBody("image/jpeg".toMediaTypeOrNull())
+        return MultipartBody.Part.createFormData("image", "image.jpg", imageRequestBody)
     }
 
     override fun onDestroy() {

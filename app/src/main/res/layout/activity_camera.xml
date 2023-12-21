@@ -8,7 +8,7 @@
     android:background="@drawable/bg_utama"
     tools:context=".ui.CameraActivity">
 
-    <SurfaceView
+    <androidx.camera.view.PreviewView
         android:id="@+id/cameraView"
         android:layout_weight="1"
         android:layout_width="match_parent"
@@ -23,6 +23,8 @@
             android:textSize="20sp"
             android:text="@string/result"
             android:gravity="center"
+            android:textColor="@color/black"
+            android:fontFamily="@font/poppins_medium"
             android:id="@+id/tv_result"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>

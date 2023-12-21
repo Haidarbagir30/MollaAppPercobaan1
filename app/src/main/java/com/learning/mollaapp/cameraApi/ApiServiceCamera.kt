@@ -1,5 +1,6 @@
 package com.learning.mollaapp.cameraApi
 
+import android.view.translation.TranslationResponse
 import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.http.Multipart
@@ -11,7 +12,7 @@ interface ApiServiceCamera {
 
     @Multipart
     @POST("read_image")
-    fun readImage(@Part image: MultipartBody.Part): Call<ReadImageResponse>
+    fun readImage(@Part image: MultipartBody.Part): Call<ImageResponse>
 
     @POST("translate")
     fun translateText(@Query("text") text: String): Call<TranslationResponse>
